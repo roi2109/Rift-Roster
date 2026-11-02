@@ -2,9 +2,9 @@
 
 ## Phase 1: Environment & Strict Type Setup
 
-- [ ] Task 1: Initialize the project using Vite's React-TypeScript template and configure the base directory skeleton under `/src`.
-- [ ] Task 2: Install project dependencies (`react-router-dom`, `vitest`) and verify the `vite.config.ts` setup.
-- [ ] Task 3: Design explicit TypeScript data models and interfaces for Champions, Skills, Skins, and Items (No any allowed!).
+- [✔] Task 1: Initialize the project using Vite's React-TypeScript template and configure the base directory skeleton under `/src`.
+- [✔] Task 2: Install project dependencies (`react-router-dom`, `vitest`) and verify the `vite.config.ts` setup.
+- [✔] Task 3: Design explicit TypeScript data models and interfaces for Champions, Skills, Skins, and Items (No any allowed!).
 
 ## Phase 2: Shell, Infrastructure & Core Logic
 

@@ -15,4 +15,14 @@
 **17:50 · claude**
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\AGENTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
-> @BRIEF.md  @AGENTS.md  @PRD.md  refer to these files as guide-lines to the work process, task 1 is completed and commite, lets move on to task 2
+> @BRIEF.md @AGENTS.md @PRD.md refer to these files as guide-lines to the work process, task 1 is completed and commite, lets move on to task 2
+
+**17:59 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\tasks.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> task 2 was reviewed and commited, lets move on to task 3, keep refering to the files i gave you in the last task for the rest of the work progress
+
+**18:07 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> so far there should be no changes on the front side of the project?

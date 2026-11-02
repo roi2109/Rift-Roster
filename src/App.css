@@ -3,3 +3,53 @@
   margin: 0 auto;
   padding: 2rem 1rem;
 }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #161b22;
+  border-bottom: 1px solid #c8aa6e;
+}
+
+.navbar__brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #c8aa6e;
+  text-decoration: none;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar__link {
+  display: block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: #e8e6e3;
+  text-decoration: none;
+}
+
+.navbar__link:hover {
+  background-color: #21262d;
+}
+
+/* NavLink adds the "active" class to the link of the current page. */
+.navbar__link.active {
+  background-color: #c8aa6e;
+  color: #0e1117;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+  }
+}

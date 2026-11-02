@@ -26,3 +26,12 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > so far there should be no changes on the front side of the project?
+
+**18:11 · claude**
+
+> task 3 was reviewed and committed, lets move on to task 4
+
+**18:20 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\main.tsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> have you strictly been using typescript? make sure you refer to the brief file as your main guide-line, and check after every process you run that you dont deviate from it

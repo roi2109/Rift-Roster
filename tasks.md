@@ -9,7 +9,7 @@
 ## Phase 2: Shell, Infrastructure & Core Logic
 
 - [✔] Task 4: Configure client-side routing trees in `App.tsx` and assemble a global NavLink navigation header.
-- [ ] Task 5: Author pure data processing helpers for item/champion filtering and write 5 unit tests running on Vitest to validate them.
+- [✔] Task 5: Author pure data processing helpers for item/champion filtering and write 5 unit tests running on Vitest to validate them.
 - [ ] Task 6: Program the centralized API request layer to handle exactly 3 UI states: Loading, Error, and Success.
 
 ## Phase 3: Champions Browser UI

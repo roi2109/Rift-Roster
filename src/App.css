@@ -89,3 +89,87 @@
 .error-message p {
   margin: 0.25rem 0 0;
 }
+
+.champion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.champion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background-color: #161b22;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    transform 0.15s;
+}
+
+.champion-card:hover,
+.champion-card:focus-visible {
+  border-color: #c8aa6e;
+  transform: translateY(-2px);
+}
+
+.champion-card__icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid #c8aa6e;
+}
+
+.champion-card__name {
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+.champion-card__title {
+  font-size: 0.8rem;
+  color: #a0a4ab;
+}
+
+.champion-card__roles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.role-tag {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background-color: #21262d;
+  font-size: 0.7rem;
+  color: #c8aa6e;
+}
+
+.empty-message {
+  color: #a0a4ab;
+}
+
+@media (max-width: 480px) {
+  .champion-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .champion-card__icon {
+    width: 72px;
+    height: 72px;
+  }
+}

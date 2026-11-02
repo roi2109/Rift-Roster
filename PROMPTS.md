@@ -45,3 +45,8 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\utils\filters.test.ts in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > task 5 was reviewed and committed, tests were manually ran too both via bash terminal and vitest UI, lets start with task 6
+
+**19:11 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\tasks.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> 6 reviewd and committed, lets move to task 7

@@ -4,9 +4,14 @@ import ChampionGrid from "../components/ChampionGrid";
 import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import { useChampions } from "../hooks/useDataDragon";
+import type { Favorites } from "../hooks/useFavorites";
 import { filterChampions, type ChampionFilter } from "../utils/filters";
 
-function ChampionsPage() {
+interface ChampionsPageProps {
+  favorites: Favorites;
+}
+
+function ChampionsPage({ favorites }: ChampionsPageProps) {
   const state = useChampions();
   // The filter lives here, the closest parent of both the filter form and the grid.
   const [filter, setFilter] = useState<ChampionFilter>({ query: "", role: "All" });
@@ -26,7 +31,12 @@ function ChampionsPage() {
           <p className="result-count">
             Showing {visibleChampions.length} of {state.data.champions.length} champions
           </p>
-          <ChampionGrid champions={visibleChampions} version={state.data.version} />
+          <ChampionGrid
+            champions={visibleChampions}
+            version={state.data.version}
+            isFavorite={favorites.isFavorite}
+            onToggleFavorite={favorites.toggle}
+          />
         </>
       )}
     </section>

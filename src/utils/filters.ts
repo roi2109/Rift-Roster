@@ -61,3 +61,15 @@ export function isShopItem(item: ItemData): boolean {
 export function withoutChromas(skins: Skin[]): Skin[] {
   return skins.filter((skin) => skin.parentSkin === undefined);
 }
+
+/**
+ * Looks up the favorite ids in the full champion list, in the order they were favorited.
+ * Ids that no longer match a champion (e.g. renamed in a patch) are skipped.
+ */
+export function selectFavorites(champions: Champion[], favoriteIds: string[]): Champion[] {
+  const byId = new Map(champions.map((champion) => [champion.id, champion]));
+  return favoriteIds.flatMap((id) => {
+    const champion = byId.get(id);
+    return champion === undefined ? [] : [champion];
+  });
+}

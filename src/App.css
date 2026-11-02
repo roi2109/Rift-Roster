@@ -99,28 +99,89 @@
   list-style: none;
 }
 
+/* The card is a frame holding two siblings: the link (whole card area) and the star button on top. */
 .champion-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
+  position: relative;
   height: 100%;
-  padding: 1rem 0.75rem;
   border: 1px solid #30363d;
   border-radius: 8px;
   background-color: #161b22;
-  color: inherit;
-  text-align: center;
-  text-decoration: none;
   transition:
     border-color 0.15s,
     transform 0.15s;
 }
 
 .champion-card:hover,
-.champion-card:focus-visible {
+.champion-card:focus-within {
   border-color: #c8aa6e;
   transform: translateY(-2px);
+}
+
+.champion-card__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+.champion-card__favorite {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+}
+
+.favorite-button {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #a0a4ab;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    transform 0.15s;
+}
+
+.favorite-button:hover {
+  color: #f0d78c;
+  transform: scale(1.15);
+}
+
+.favorite-button.is-active {
+  color: #f0c419;
+}
+
+.champion-header__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.champion-header__heading .favorite-button {
+  font-size: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  border: 1px dashed #30363d;
+  border-radius: 8px;
+  color: #a0a4ab;
+  text-align: center;
+}
+
+.empty-state a {
+  color: #c8aa6e;
 }
 
 .champion-card__icon {

@@ -1,11 +1,14 @@
 import { championSplashUrl } from "../services/dataDragon";
 import type { Champion } from "../types/champion";
+import FavoriteButton from "./FavoriteButton";
 
 interface ChampionHeaderProps {
   champion: Champion;
+  isFavorite: boolean;
+  onToggleFavorite: (id: string) => void;
 }
 
-function ChampionHeader({ champion }: ChampionHeaderProps) {
+function ChampionHeader({ champion, isFavorite, onToggleFavorite }: ChampionHeaderProps) {
   return (
     <header className="champion-header">
       <img
@@ -14,7 +17,14 @@ function ChampionHeader({ champion }: ChampionHeaderProps) {
         alt={`${champion.name} splash art`}
       />
       <div className="champion-header__text">
-        <h1 className="champion-header__name">{champion.name}</h1>
+        <div className="champion-header__heading">
+          <h1 className="champion-header__name">{champion.name}</h1>
+          <FavoriteButton
+            active={isFavorite}
+            championName={champion.name}
+            onToggle={() => onToggleFavorite(champion.id)}
+          />
+        </div>
         <p className="champion-header__title">{champion.title}</p>
         <ul className="champion-card__roles">
           {champion.tags.map((role) => (

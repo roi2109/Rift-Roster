@@ -2,7 +2,14 @@ import { describe, expect, it } from "vitest";
 import type { Champion } from "../types/champion";
 import type { DataDragonImage } from "../types/dataDragon";
 import type { Item, ItemData } from "../types/item";
-import { filterChampions, filterItems, isShopItem, toItemList, withoutChromas } from "./filters";
+import {
+  filterChampions,
+  filterItems,
+  isShopItem,
+  selectFavorites,
+  toItemList,
+  withoutChromas,
+} from "./filters";
 
 // Test data builders: only the fields a test cares about are passed in.
 const image: DataDragonImage = { full: "x.png", sprite: "s.png", group: "g", x: 0, y: 0, w: 48, h: 48 };
@@ -136,5 +143,17 @@ describe("withoutChromas", () => {
       { id: "103008", num: 8, name: "Popstar Ahri (Amethyst)", chromas: false, parentSkin: 4 },
     ]);
     expect(result.map((skin) => skin.num)).toEqual([0, 4]);
+  });
+});
+
+describe("selectFavorites", () => {
+  it("returns the favorite champions in the order they were added", () => {
+    const result = selectFavorites(champions, ["Annie", "Ahri"]);
+    expect(namesOf(result)).toEqual(["Annie", "Ahri"]);
+  });
+
+  it("skips saved ids that no longer match a champion", () => {
+    const result = selectFavorites(champions, ["Garen", "OldChampion"]);
+    expect(namesOf(result)).toEqual(["Garen"]);
   });
 });

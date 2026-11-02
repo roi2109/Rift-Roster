@@ -5,9 +5,14 @@ import Loader from "../components/Loader";
 import SkillList from "../components/SkillList";
 import SkinCarousel from "../components/SkinCarousel";
 import { useChampionDetail } from "../hooks/useDataDragon";
+import type { Favorites } from "../hooks/useFavorites";
 import { withoutChromas } from "../utils/filters";
 
-function ChampionDetailPage() {
+interface ChampionDetailPageProps {
+  favorites: Favorites;
+}
+
+function ChampionDetailPage({ favorites }: ChampionDetailPageProps) {
   // The id comes from the URL (/champions/:id), so every champion has its own address.
   const { id = "" } = useParams<{ id: string }>();
   const state = useChampionDetail(id);
@@ -21,7 +26,11 @@ function ChampionDetailPage() {
       {state.status === "error" && <ErrorMessage message={state.message} />}
       {state.status === "success" && (
         <>
-          <ChampionHeader champion={state.data.champion} />
+          <ChampionHeader
+            champion={state.data.champion}
+            isFavorite={favorites.isFavorite(state.data.champion.id)}
+            onToggleFavorite={favorites.toggle}
+          />
           <section className="champion-detail__section">
             <h2>Lore</h2>
             <p className="champion-detail__lore">{state.data.champion.lore}</p>

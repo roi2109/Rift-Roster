@@ -16,7 +16,7 @@
 
 - [✔] Task 7: Build the Master View component to display a responsive champion catalog grid mapped with explicit unique keys.
 - [✔] Task 8: Complete the dynamic Detail View viewport using `useParams` to parse IDs and map out background champion biographies.
-- [ ] Task 9: Assemble the capability grids for skills and build the interactive horizontal image carousel to cycle through skins.
+- [✔] Task 9: Assemble the capability grids for skills and build the interactive horizontal image carousel to cycle through skins.
 
 ## Phase 4: Extended Custom Modules (Granular Steps)
 

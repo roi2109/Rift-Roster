@@ -22,10 +22,20 @@ export interface ItemList {
   items: Item[];
 }
 
+/** An error that remembers the HTTP status, so callers can tell "not found" apart from other failures. */
+class HttpError extends Error {
+  status: number;
+
+  constructor(status: number) {
+    super(`Request failed with status ${status}`);
+    this.status = status;
+  }
+}
+
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const response = await fetch(url, { signal });
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+    throw new HttpError(response.status);
   }
   // response.json() is untyped; we trust the API to match the interfaces in src/types.
   const body: unknown = await response.json();
@@ -61,14 +71,24 @@ export async function fetchChampionDetail(
   id: string,
   signal?: AbortSignal,
 ): Promise<ChampionDetailResult> {
+  const notFound = new Error(`Champion "${id}" was not found. Ids are case-sensitive, e.g. "Ahri".`);
   const version = await getLatestVersion();
-  const response = await getJson<DataDragonResponse<ChampionDetail>>(
-    `${BASE_URL}/cdn/${version}/data/${LOCALE}/champion/${id}.json`,
-    signal,
-  );
+  let response: DataDragonResponse<ChampionDetail>;
+  try {
+    response = await getJson<DataDragonResponse<ChampionDetail>>(
+      `${BASE_URL}/cdn/${version}/data/${LOCALE}/champion/${id}.json`,
+      signal,
+    );
+  } catch (error: unknown) {
+    // Data Dragon answers a missing champion file with 403, not 404.
+    if (error instanceof HttpError && (error.status === 403 || error.status === 404)) {
+      throw notFound;
+    }
+    throw error;
+  }
   const champion = response.data[id];
   if (champion === undefined) {
-    throw new Error(`Champion "${id}" was not found`);
+    throw notFound;
   }
   return { version, champion };
 }

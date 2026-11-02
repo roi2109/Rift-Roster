@@ -10,11 +10,11 @@
 
 - [✔] Task 4: Configure client-side routing trees in `App.tsx` and assemble a global NavLink navigation header.
 - [✔] Task 5: Author pure data processing helpers for item/champion filtering and write 5 unit tests running on Vitest to validate them.
-- [ ] Task 6: Program the centralized API request layer to handle exactly 3 UI states: Loading, Error, and Success.
+- [✔] Task 6: Program the centralized API request layer to handle exactly 3 UI states: Loading, Error, and Success.
 
 ## Phase 3: Champions Browser UI
 
-- [ ] Task 7: Build the Master View component to display a responsive champion catalog grid mapped with explicit unique keys.
+- [✔] Task 7: Build the Master View component to display a responsive champion catalog grid mapped with explicit unique keys.
 - [ ] Task 8: Complete the dynamic Detail View viewport using `useParams` to parse IDs and map out background champion biographies.
 - [ ] Task 9: Assemble the capability grids for skills and build the interactive horizontal image carousel to cycle through skins.
 

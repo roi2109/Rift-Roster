@@ -1,23 +1,29 @@
 import { Link, useParams } from "react-router-dom";
+import ChampionHeader from "../components/ChampionHeader";
 import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import { useChampionDetail } from "../hooks/useDataDragon";
 
 function ChampionDetailPage() {
+  // The id comes from the URL (/champions/:id), so every champion has its own address.
   const { id = "" } = useParams<{ id: string }>();
   const state = useChampionDetail(id);
 
   return (
-    <section>
-      <Link to="/">← Back to champions</Link>
+    <section className="champion-detail">
+      <Link to="/" className="back-link">
+        ← Back to champions
+      </Link>
       {state.status === "loading" && <Loader label="Loading champion…" />}
       {state.status === "error" && <ErrorMessage message={state.message} />}
       {state.status === "success" && (
         <>
-          <h1>
-            {state.data.champion.name}, {state.data.champion.title}
-          </h1>
-          <p>Lore, skills and skins will appear here.</p>
+          <ChampionHeader champion={state.data.champion} />
+          <section className="champion-detail__section">
+            <h2>Lore</h2>
+            <p className="champion-detail__lore">{state.data.champion.lore}</p>
+          </section>
+          {/* Skills and skins are added in task 9. */}
         </>
       )}
     </section>

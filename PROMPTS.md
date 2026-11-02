@@ -35,3 +35,8 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\main.tsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > have you strictly been using typescript? make sure you refer to the brief file as your main guide-line, and check after every process you run that you dont deviate from it
+
+**18:27 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\pages\ChampionDetailPage.tsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> these 2 gaps in the documents are not important for now, task 4 was reviewed and committed, lets move on to task 5

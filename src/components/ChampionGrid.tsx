@@ -8,7 +8,7 @@ interface ChampionGridProps {
 
 function ChampionGrid({ champions, version }: ChampionGridProps) {
   if (champions.length === 0) {
-    return <p className="empty-message">No champions to show.</p>;
+    return <p className="empty-message">No champions match your search.</p>;
   }
 
   return (

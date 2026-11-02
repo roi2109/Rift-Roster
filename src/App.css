@@ -173,3 +173,53 @@
     height: 72px;
   }
 }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: #a0a4ab;
+}
+
+.filters__field input,
+.filters__field select {
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background-color: #161b22;
+  color: #e8e6e3;
+  font: inherit;
+}
+
+.filters__field input:focus,
+.filters__field select:focus {
+  outline: none;
+  border-color: #c8aa6e;
+}
+
+.result-count {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: #a0a4ab;
+}
+
+@media (max-width: 480px) {
+  .filters__field {
+    flex: 1 1 100%;
+  }
+
+  .filters__field input,
+  .filters__field select {
+    min-width: 0;
+    width: 100%;
+  }
+}

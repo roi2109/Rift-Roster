@@ -2,7 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import ChampionHeader from "../components/ChampionHeader";
 import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
+import SkillList from "../components/SkillList";
+import SkinCarousel from "../components/SkinCarousel";
 import { useChampionDetail } from "../hooks/useDataDragon";
+import { withoutChromas } from "../utils/filters";
 
 function ChampionDetailPage() {
   // The id comes from the URL (/champions/:id), so every champion has its own address.
@@ -23,7 +26,25 @@ function ChampionDetailPage() {
             <h2>Lore</h2>
             <p className="champion-detail__lore">{state.data.champion.lore}</p>
           </section>
-          {/* Skills and skins are added in task 9. */}
+          <section className="champion-detail__section">
+            <h2>Abilities</h2>
+            <SkillList
+              passive={state.data.champion.passive}
+              spells={state.data.champion.spells}
+              version={state.data.version}
+              resource={state.data.champion.partype}
+            />
+          </section>
+          <section className="champion-detail__section">
+            <h2>Skins</h2>
+            {/* key resets the carousel to the first skin whenever a different champion is shown. */}
+            <SkinCarousel
+              key={state.data.champion.id}
+              championId={state.data.champion.id}
+              championName={state.data.champion.name}
+              skins={withoutChromas(state.data.champion.skins)}
+            />
+          </section>
         </>
       )}
     </section>

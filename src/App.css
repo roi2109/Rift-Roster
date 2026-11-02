@@ -301,3 +301,152 @@
     font-size: 1.75rem;
   }
 }
+
+.skill-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background-color: #161b22;
+}
+
+.skill__icon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #c8aa6e;
+  border-radius: 6px;
+}
+
+.skill__name {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.skill__key {
+  display: inline-block;
+  min-width: 1.75rem;
+  margin-right: 0.25rem;
+  padding: 0 0.4rem;
+  border-radius: 4px;
+  background-color: #c8aa6e;
+  color: #0e1117;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.skill__description {
+  margin: 0;
+  font-size: 0.9rem;
+  /* Keeps the line breaks produced by stripHtml. */
+  white-space: pre-line;
+}
+
+.skill__meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #a0a4ab;
+}
+
+.skin-carousel__stage {
+  position: relative;
+}
+
+.skin-carousel__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1215 / 717;
+  object-fit: cover;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+}
+
+.skin-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #c8aa6e;
+  border-radius: 50%;
+  background-color: rgba(14, 17, 23, 0.8);
+  color: #c8aa6e;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.skin-carousel__arrow:hover {
+  background-color: #c8aa6e;
+  color: #0e1117;
+}
+
+.skin-carousel__arrow--prev {
+  left: 0.75rem;
+}
+
+.skin-carousel__arrow--next {
+  right: 0.75rem;
+}
+
+.skin-carousel__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.skin-carousel__caption span {
+  color: #a0a4ab;
+}
+
+.skin-carousel__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skin-carousel__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding: 0;
+  border: 1px solid #c8aa6e;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.skin-carousel__dot.is-active {
+  background-color: #c8aa6e;
+}
+
+@media (max-width: 480px) {
+  .skill-list {
+    grid-template-columns: 1fr;
+  }
+
+  .skill__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .skin-carousel__arrow {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.4rem;
+  }
+}

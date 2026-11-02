@@ -80,6 +80,8 @@ export interface Skin {
   num: number;
   name: string;
   chromas: boolean;
+  /** Set only on chromas (color variants): the `num` of the skin they recolor. Chromas have no splash art. */
+  parentSkin?: number;
 }
 
 /** A champion as returned by the per-champion endpoint (`champion/{id}.json`). */

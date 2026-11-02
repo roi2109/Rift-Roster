@@ -60,3 +60,8 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\tasks.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > task 7b reviewed tested and committed, lets proceed to task 8
+
+**19:47 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\services\dataDragon.ts in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> 8 reviewed, tested and committed, onto task 9

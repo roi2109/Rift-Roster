@@ -1,4 +1,4 @@
-import type { Champion, ChampionRole } from "../types/champion";
+import type { Champion, ChampionRole, Skin } from "../types/champion";
 import type { Item, ItemData } from "../types/item";
 
 /** "All" means the role/tag filter is turned off. */
@@ -55,4 +55,9 @@ export function isShopItem(item: ItemData): boolean {
     item.inStore !== false &&
     item.requiredChampion === undefined
   );
+}
+
+/** Keeps real skins and drops chromas, which are listed in `skins` too but have no splash art. */
+export function withoutChromas(skins: Skin[]): Skin[] {
+  return skins.filter((skin) => skin.parentSkin === undefined);
 }

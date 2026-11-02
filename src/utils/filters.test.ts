@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { Champion } from "../types/champion";
 import type { DataDragonImage } from "../types/dataDragon";
 import type { Item, ItemData } from "../types/item";
-import { filterChampions, filterItems, isShopItem, toItemList } from "./filters";
+import { filterChampions, filterItems, isShopItem, toItemList, withoutChromas } from "./filters";
 
 // Test data builders: only the fields a test cares about are passed in.
 const image: DataDragonImage = { full: "x.png", sprite: "s.png", group: "g", x: 0, y: 0, w: 48, h: 48 };
@@ -125,5 +125,16 @@ describe("isShopItem", () => {
     for (const item of [notPurchasable, otherMapOnly, notInStore, championOnly]) {
       expect(isShopItem(item)).toBe(false);
     }
+  });
+});
+
+describe("withoutChromas", () => {
+  it("keeps real skins and removes chromas that point to a parent skin", () => {
+    const result = withoutChromas([
+      { id: "103000", num: 0, name: "default", chromas: false },
+      { id: "103004", num: 4, name: "Popstar Ahri", chromas: true },
+      { id: "103008", num: 8, name: "Popstar Ahri (Amethyst)", chromas: false, parentSkin: 4 },
+    ]);
+    expect(result.map((skin) => skin.num)).toEqual([0, 4]);
   });
 });

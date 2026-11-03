@@ -92,3 +92,8 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\BRIEF.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > Modify the PRD and tasks files
+
+**17:49 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\tasks.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> the changes to the md files were checked and committed, lets move on to the README

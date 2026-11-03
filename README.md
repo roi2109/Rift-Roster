@@ -1,99 +1,96 @@
-# נקודת פתיחה לפרויקט הגמר · יומן פרומפטים אוטומטי
+# RiftRoster
 
-ב-repo הזה יש דבר אחד: **רישום אוטומטי של כל פרומפט שאתם שולחים לסוכן**, אל תוך `PROMPTS.md`.
-את האפליקציה אתם בונים בעצמכם, לפי הוראות הפרויקט.
+A fast, responsive reference guide for **League of Legends** champions and items.
+Browse every champion, open a page with their lore, abilities and skins, save favorites, and look up item prices and stats.
 
-## מתחילים
+Built with **React + Vite + TypeScript** as a front-end-only app: there is no server and no database. All game data comes live from Riot's public **Data Dragon** API.
 
-**1 · יוצרים repo משלכם.** היכנסו ל-GitHub עם המשתמש שלכם, ופתחו את הקישור:
-**[יצירת repo חדש מהתבנית](https://github.com/new?template_name=react-project-starter&template_owner=YarivGilad)**.
-תנו לו שם, בחרו **Public**, ולחצו **Create repository**.
+## Features
 
-אפשר גם מהעמוד הזה: כשאתם מחוברים ל-GitHub, בפינה הימנית העליונה מופיע הכפתור **Use this template** ← **Create a new repository**.
-בלי חיבור ל-GitHub הכפתור לא מופיע.
+| Page | Address | What you can do |
+| --- | --- | --- |
+| **Champion Catalog** | `/` | Browse all champions in a grid, search by name, and filter by role (Assassin, Fighter, Mage, Marksman, Support, Tank). |
+| **Champion Details** | `/champions/:id` (e.g. `/champions/Ahri`) | Read the champion's lore, see their passive and Q/W/E/R abilities with cooldowns and costs, and step through every skin in a carousel. |
+| **Favorites** | `/favorites` | See the champions you starred (☆). Favorites are saved in `localStorage`, so they are still there after a refresh. |
+| **Items Codex** | `/items` | Look up every purchasable item with its total, base and sell gold; search, filter by stat (Attack Damage, Ability Power, Health…) and sort by price. |
+| **Not Found** | any other address | A 404 page with a link back to the catalog. |
 
-<img src=".github/images/use-this-template.png" alt="Use this template → Create a new repository" width="300">
+Every page that loads data shows a **loading** spinner, an **error** message if the request fails, or the **data**.
 
-**2 · מורידים אותו למחשב.**
+## Getting started
 
-```bash
-git clone https://github.com/<שם-המשתמש-שלכם>/<שם-הפרויקט>.git
-cd <שם-הפרויקט>
-```
-
-**3 · בודקים שהיומן עובד.** פתחו את הסוכן **מתוך תיקיית הפרויקט**, שלחו לו הודעה כלשהי, ואז:
+**Requirements:** [Node.js](https://nodejs.org/) 20.19+ or 22.12+ (needed by Vite 8).
 
 ```bash
-tail -n 20 PROMPTS.md
+git clone https://github.com/roi2109/Rift-Roster.git
+cd Rift-Roster
+npm install
+npm run dev
 ```
 
-רואים את ההודעה? מצוין. לא רואים? ראו "כשזה לא עובד" למטה. **אל תמשיכו לפני שזה עובד.**
+Then open the address Vite prints (usually <http://localhost:5173>).
 
-**4 · יוצרים את אפליקציית Vite באותה תיקייה** (שימו לב לנקודה אחרי `@latest`):
+### Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the development server with hot reload. |
+| `npm run build` | Type-checks the project (`tsc -b`) and builds it into `dist/`. |
+| `npm run preview` | Serves the built `dist/` folder locally. |
+| `npm test` | Runs all unit tests once in the terminal. |
+| `npm run test:watch` | Runs the tests again on every file save. |
+| `npm run test:ui` | Opens the **Vitest UI** in the browser to run and inspect the tests. |
+| `npm run lint` | Lints the code with oxlint. |
+
+## Tests
+
+The project has **31 unit tests** written with [Vitest](https://vitest.dev/). They test the app's own logic as pure functions, without React or the network:
+
+| Test file | What it checks |
+| --- | --- |
+| `src/utils/filters.test.ts` | Champion search and role filter, item search and stat filter, turning the API's object into a list, keeping only shop items, removing duplicate items and skin chromas, picking out favorites, and sorting items by price. |
+| `src/utils/format.test.ts` | Turning the API's HTML descriptions into plain text, formatting per-rank values (`[10, 9, 8]` → `10 / 9 / 8`), and wrapping the carousel index. |
+| `src/utils/favorites.test.ts` | Saving and loading favorites from `localStorage`, toggling a favorite, and staying safe with broken JSON or blocked storage. |
 
 ```bash
-npm create vite@latest . -- --template react-ts
+npm test          # in the terminal
+npm run test:ui   # in the browser
 ```
 
-כשמופיעה השאלה `Current directory is not empty`, בחרו **Ignore files and continue**.
+## API
 
-> ⚠️ **לא** לבחור `Remove existing files and continue` — זה מוחק את ה-hooks ואת `PROMPTS.md`, והיומן נעלם.
+All data comes from **[Riot Data Dragon](https://developer.riotgames.com/docs/lol#data-dragon)**, Riot's free public CDN for League of Legends data. It needs **no API key** and allows requests straight from the browser.
 
-Vite יחליף את `README.md` ואת `.gitignore` בגרסאות שלו. זה בסדר: את ה-README תכתבו מחדש, על הפרויקט שלכם.
+| Data | Endpoint |
+| --- | --- |
+| Latest patch version | `https://ddragon.leagueoflegends.com/api/versions.json` |
+| All champions | `https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/champion.json` |
+| One champion (lore, abilities, skins) | `https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/champion/{id}.json` |
+| All items | `https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/item.json` |
+| Images | `…/cdn/{version}/img/champion/…`, `…/img/spell/…`, `…/img/item/…`, `…/cdn/img/champion/splash/{id}_{num}.jpg` |
 
-**5 · commit ראשון**, ומשם — משימה אחת בכל פעם, ו-commit אחרי כל משימה.
+The app first fetches the latest patch version, then uses it in every other request, so the data always matches the current game patch.
 
-## מה יש כאן
+## Project structure
 
 ```
-.claude/settings.json        hook ל-Claude Code
-.codex/hooks.json            hook ל-Codex
-.gemini/settings.json        hook ל-Gemini CLI
-.agents/hooks.json           hook ל-Antigravity
-.github/hooks/log-prompt.json  hook ל-GitHub Copilot (ב-VS Code וב-Copilot CLI)
-scripts/log-prompt.mjs       הסקריפט שכותב ל-PROMPTS.md
-AGENTS.md, CLAUDE.md         כללי עבודה לסוכן: משימה אחת בכל פעם, בלי commit בשבילכם
-PROMPTS.md                   היומן — נכתב אוטומטית
+src/
+├── components/   Reusable UI pieces (NavBar, ChampionCard, ChampionGrid, SkinCarousel, ItemCard, …)
+├── pages/        One component per route (ChampionsPage, ChampionDetailPage, FavoritesPage, ItemsPage, NotFoundPage)
+├── hooks/        useFetch (loading / error / success), the Data Dragon hooks, and useFavorites
+├── services/     dataDragon.ts — the only file that calls fetch, plus image URL builders
+├── types/        TypeScript interfaces for the API data (Champion, Skill, Skin, Item, …)
+├── utils/        Pure helper functions and their Vitest tests
+├── App.tsx       Routes and the shared favorites state
+└── main.tsx      Entry point, wraps the app in BrowserRouter
 ```
 
-## איך היומן עובד
+## Project documents
 
-לסוכנים יש **hooks**: נקודות שבהן הם מריצים פקודה משלכם. כאן מחובר hook שרץ **בכל פעם שאתם שולחים הודעה לסוכן**.
-הוא מעביר את הפרומפט לסקריפט `scripts/log-prompt.mjs`, והסקריפט מוסיף אותו ל-`PROMPTS.md` עם השעה ושם הסוכן.
+- [`PRD.md`](PRD.md): what the app is, who it is for, its pages and the acceptance criteria.
+- [`tasks.md`](tasks.md): the build plan, one task at a time, each with a "Done when:" line.
+- [`PROMPTS.md`](PROMPTS.md): every prompt sent to the AI coding agent during development, logged automatically.
 
-```markdown
-## 2026-10-14
+---
 
-**18:42 · claude**
-
-> תוסיף שדה חיפוש מעל הרשימה
-
-**18:55 · claude**
-
-> החיפוש מוחק את הרשימה כשמוחקים את כל האותיות. תתקן
-```
-
-הרשומה השנייה היא בדיוק מה שאנחנו מחפשים: **תהליך**. ניסיון, בדיקה, תיקון.
-
-| סוכן | הערה |
-|---|---|
-| **Claude Code** | בהפעלה הראשונה צריך לאשר את ה-hook פעם אחת. |
-| **Codex CLI** | אוטומטי. |
-| **Gemini CLI** | בהפעלה הראשונה תופיע אזהרה על hook חדש בפרויקט. זה ה-hook הזה. |
-| **Antigravity** | ה-hook לא מקבל את הפרומפט עצמו, אז הרשומה מופיעה רק כשהסוכן מסיים לענות. |
-| **GitHub Copilot** | ב-VS Code: צריך לאשר שאתם סומכים על התיקייה (Trust). |
-| **כלים אחרים** (Cursor ועוד) | אין hook. ב-`AGENTS.md` יש הוראה לסוכן לרשום כל הודעה בעצמו — ודאו שהוא עושה את זה. |
-
-## כשזה לא עובד
-
-- ודאו ש-`node -v` מציג מספר גרסה.
-- ודאו שפתחתם את הסוכן **מתוך תיקיית הפרויקט**, ולא מתיקייה מעליה.
-- עדיין לא עובד? הוסיפו את הרשומה בעצמכם, באותו פורמט, ותגידו לי.
-
-## היומן והציון
-
-- **commit ל-`PROMPTS.md` יחד עם הקוד**, אחרי כל משימה.
-- אחרי כל משימה הוסיפו שורה משלכם: מה בדקתם, ומה שיניתם בעצמכם.
-- אל תערכו את היומן בדיעבד כדי שייראה יפה. יומן מסודר מדי בולט לרעה.
-
-> **פרטיות:** כל מה שאתם כותבים לסוכן נשמר בקובץ ועולה ל-GitHub. אל תכתבו בפרומפטים סיסמאות, מפתחות, או פרטים אישיים של מישהו.
+RiftRoster isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.

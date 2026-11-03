@@ -2,7 +2,7 @@
 import type { Champion, ChampionDetail } from "../types/champion";
 import type { DataDragonResponse } from "../types/dataDragon";
 import type { Item, ItemData } from "../types/item";
-import { isShopItem, toItemList } from "../utils/filters";
+import { isShopItem, toItemList, uniqueByName } from "../utils/filters";
 
 const BASE_URL = "https://ddragon.leagueoflegends.com";
 const LOCALE = "en_US";
@@ -99,7 +99,7 @@ export async function fetchItems(signal?: AbortSignal): Promise<ItemList> {
     `${BASE_URL}/cdn/${version}/data/${LOCALE}/item.json`,
     signal,
   );
-  return { version, items: toItemList(response.data).filter(isShopItem) };
+  return { version, items: uniqueByName(toItemList(response.data).filter(isShopItem)) };
 }
 
 // Image URLs. Square icons and item icons depend on the patch version; splash art does not.

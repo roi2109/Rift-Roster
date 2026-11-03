@@ -7,7 +7,9 @@ import {
   filterItems,
   isShopItem,
   selectFavorites,
+  sortItems,
   toItemList,
+  uniqueByName,
   withoutChromas,
 } from "./filters";
 
@@ -155,5 +157,34 @@ describe("selectFavorites", () => {
   it("skips saved ids that no longer match a champion", () => {
     const result = selectFavorites(champions, ["Garen", "OldChampion"]);
     expect(namesOf(result)).toEqual(["Garen"]);
+  });
+});
+
+describe("uniqueByName", () => {
+  it("keeps one item per name, preferring the lowest id", () => {
+    const result = uniqueByName([
+      makeItem("323075", { name: "Thornmail" }),
+      makeItem("3075", { name: "Thornmail" }),
+      makeItem("3031", { name: "Infinity Edge" }),
+    ]);
+    expect(result.map((item) => item.id).sort()).toEqual(["3031", "3075"]);
+  });
+});
+
+describe("sortItems", () => {
+  const priced = [
+    makeItem("1", { name: "B Sword", gold: { base: 0, total: 3000, sell: 0, purchasable: true } }),
+    makeItem("2", { name: "A Ring", gold: { base: 0, total: 400, sell: 0, purchasable: true } }),
+    makeItem("3", { name: "C Staff", gold: { base: 0, total: 3000, sell: 0, purchasable: true } }),
+  ];
+
+  it("sorts by price from cheapest to most expensive, using the name to break ties", () => {
+    expect(namesOf(sortItems(priced, "price-asc"))).toEqual(["A Ring", "B Sword", "C Staff"]);
+  });
+
+  it("sorts by price from most expensive and by name, without changing the original array", () => {
+    expect(namesOf(sortItems(priced, "price-desc"))).toEqual(["B Sword", "C Staff", "A Ring"]);
+    expect(namesOf(sortItems(priced, "name"))).toEqual(["A Ring", "B Sword", "C Staff"]);
+    expect(namesOf(priced)).toEqual(["B Sword", "A Ring", "C Staff"]);
   });
 });

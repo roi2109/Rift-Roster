@@ -21,5 +21,5 @@
 ## Phase 4: Extended Custom Modules (Granular Steps)
 
 - [✔] Task 10: Build local utility helper functions to sync champion data selections to and from browser `localStorage`.
-- [ ] Task 11: Construct the Favorites Page view to render bookmarked collections with real-time reactive unfavorite triggers.
+- [✔] Task 11: Construct the Favorites Page view to render bookmarked collections with real-time reactive unfavorite triggers.
 - [ ] Task 12: Implement the Items Codex view grid, complete with cost displays, descriptions, and functional parameter filter arrays.

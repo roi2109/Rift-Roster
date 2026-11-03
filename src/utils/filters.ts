@@ -73,3 +73,32 @@ export function selectFavorites(champions: Champion[], favoriteIds: string[]): C
     return champion === undefined ? [] : [champion];
   });
 }
+
+/**
+ * Keeps one item per name. Data Dragon lists some items twice for other game modes
+ * (e.g. Thornmail as "3075" and "323075"); the lowest id is the standard version.
+ */
+export function uniqueByName(items: Item[]): Item[] {
+  const byName = new Map<string, Item>();
+  for (const item of items) {
+    const kept = byName.get(item.name);
+    if (kept === undefined || Number(item.id) < Number(kept.id)) {
+      byName.set(item.name, item);
+    }
+  }
+  return [...byName.values()];
+}
+
+export type ItemSort = "name" | "price-asc" | "price-desc";
+
+/** Returns a sorted copy; ties on price fall back to the name so the order is always stable. */
+export function sortItems(items: Item[], sort: ItemSort): Item[] {
+  const byName = (a: Item, b: Item) => a.name.localeCompare(b.name);
+  return [...items].sort((a, b) => {
+    if (sort === "name") {
+      return byName(a, b);
+    }
+    const difference = sort === "price-asc" ? a.gold.total - b.gold.total : b.gold.total - a.gold.total;
+    return difference !== 0 ? difference : byName(a, b);
+  });
+}

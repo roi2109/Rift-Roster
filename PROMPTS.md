@@ -80,3 +80,15 @@
 
 > <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\src\pages\FavoritesPage.tsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > task 11 reviewed, tested and committed, proceed to the last task
+
+## 2026-11-03
+
+**15:33 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\tasks.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> task 12 reviewed,tested and committed, what do you mean by the PRD.md and task.md changes you mention? can you refer to the brief document and show me where it says that?
+
+**15:44 · claude**
+
+> <ide_opened_file>The user opened the file c:\RiftRoster\Rift-Roster\BRIEF.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Modify the PRD and tasks files
